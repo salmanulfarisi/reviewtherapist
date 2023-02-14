@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1018446621403",
+    "project_id": "review-therapisr",
+    "storage_bucket": "review-therapisr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018446621403:android:49b1126e2d11704f52bafe",
+        "android_client_info": {
+          "package_name": "com.gametherapist.reviewtherapist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018446621403-v3ccmnrj1t976c7ffrmmcscg7cetev3a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvuTmmYKsJmuihvFcqZPlnIllf1Mv9e9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1018446621403-v3ccmnrj1t976c7ffrmmcscg7cetev3a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
