@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:reviewtherapist/app/utils/samble_strings.dart';
@@ -29,6 +30,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User user = auth.currentUser!;
     return Scaffold(
       drawer: const CustomDrawer(),
       appBar: AppBar(
@@ -41,9 +44,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ),
             IconButton(
               onPressed: () {},
-              icon: const CircleAvatar(
+              icon: CircleAvatar(
                 radius: 30,
-                child: Icon(CupertinoIcons.person),
+                backgroundImage: user.photoURL == ''
+                    ? const NetworkImage(
+                        "https://prod.assets.earlygamecdn.com/images/warzone-2-release-date.jpg?mtime=1643176468")
+                    : NetworkImage("${user.photoURL}"),
               ),
             ),
           ],

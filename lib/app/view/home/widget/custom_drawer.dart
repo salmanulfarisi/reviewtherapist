@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:reviewtherapist/app/utils/navigate_funtions.dart';
 import 'package:reviewtherapist/app/view/onboarding_screen.dart';
 import 'package:reviewtherapist/app/view/widget/dialogebox.dart';
@@ -12,8 +13,10 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FirebaseAuth auth = FirebaseAuth.instance;
+    final User user = auth.currentUser!;
     void logout() async {
       await auth.signOut();
+      await GoogleSignIn().signOut();
     }
 
     return Drawer(
@@ -27,19 +30,20 @@ class CustomDrawer extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 CircleAvatar(
                   radius: 30,
-                  child: Icon(
-                    CupertinoIcons.person,
-                  ),
+                  backgroundImage: user.photoURL == ''
+                      ? const NetworkImage(
+                          "https://prod.assets.earlygamecdn.com/images/warzone-2-release-date.jpg?mtime=1643176468")
+                      : NetworkImage("${user.photoURL}"),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
-                  'User Name',
-                  style: TextStyle(
+                  user.displayName == '' ? "No Name" : "${user.displayName}",
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 24,
                   ),

@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reviewtherapist/app/utils/navigate_funtions.dart';
-import 'package:reviewtherapist/app/utils/samble_strings.dart';
 import 'package:reviewtherapist/app/utils/size.dart';
+import 'package:reviewtherapist/app/view/profile/widget/tab_bar.dart';
 
 import 'profile_edit.dart';
 
@@ -15,6 +16,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen>
     with TickerProviderStateMixin {
   late TabController _controller;
+
   @override
   void initState() {
     super.initState();
@@ -23,76 +25,40 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User user = auth.currentUser!;
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.black45,
-          title: Row(
-            children: const [
-              CircleAvatar(
-                child: Icon(
-                  Icons.person,
-                ),
-              ),
-              AppSize.sizeW10,
-              Text('User Name', style: TextStyle(fontSize: 16)),
-            ],
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                NavigateFunctions.pushPage(context, const ProfileEdit());
-              },
-              icon: const Icon(
-                Icons.arrow_right,
-              ),
-            ),
-          ],
-          bottom: TabBar(
-            controller: _controller,
-
-            physics: const BouncingScrollPhysics(),
-            isScrollable: true,
-            labelColor: Colors.white,
-            unselectedLabelColor: Colors.grey,
-            indicatorColor: Colors.red,
-            // indicatorSize: TabBarIndicatorSize.tab,
-            indicator: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              color: Colors.red,
-            ),
-            tabs: [
-              Tab(
-                text: chipText[0],
-              ),
-              Tab(
-                text: chipText[1],
-              ),
-              Tab(
-                text: chipText[2],
-              ),
-              Tab(
-                text: chipText[3],
-              ),
-              Tab(
-                text: chipText[4],
-              ),
-              Tab(
-                text: chipText[5],
-              ),
-            ],
-          )),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        backgroundColor: Colors.black45,
+        title: Row(
           children: [
-            const Text('Profile Screen'),
-            TextButton(
-              onPressed: () async {},
-              child: const Text('Logout'),
+            CircleAvatar(
+              backgroundImage: user.photoURL == ''
+                  ? const NetworkImage(
+                      "https://prod.assets.earlygamecdn.com/images/warzone-2-release-date.jpg?mtime=1643176468")
+                  : NetworkImage("${user.photoURL}"),
+            ),
+            AppSize.sizeW10,
+            Text(
+              user.displayName == '' ? "No Name" : "${user.displayName}",
+              style: const TextStyle(
+                fontSize: 16,
+              ),
             ),
           ],
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              NavigateFunctions.pushPage(context, const ProfileEdit());
+            },
+            icon: const Icon(
+              Icons.arrow_right,
+            ),
+          ),
+        ],
       ),
+      body: const MediaSection(),
     );
   }
 }

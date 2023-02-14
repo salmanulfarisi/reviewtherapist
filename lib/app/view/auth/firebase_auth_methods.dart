@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -30,6 +31,7 @@ class FirebaseAuthMethods {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email.trim(), password: password.trim());
+      addUserDetails();
       showDialog(
           context: context,
           builder: (context) => dialogeBox(
@@ -238,20 +240,34 @@ class FirebaseAuthMethods {
         // for google sign in and google sign up, only one as of now),
         // do the following:
 
-        // if (userCredential.user != null) {
-        //   if (userCredential.additionalUserInfo!.isNewUser) {
-        //     // store information in firestore
-        //     // or do anything you want to do
-        //     // for new users
-        //   } else {
-        //     // do something else for existing users
-        //   }
-        // }
+        if (userCredential.user != null) {
+          if (userCredential.additionalUserInfo!.isNewUser) {
+            // store information in firestore
+            // or do anything you want to do
+            // for new users
+            addUserDetails();
+          } else {
+            // do something else for existing users
+          }
+        }
       }
       // }
     } on FirebaseAuthException catch (e) {
       Fluttertoast.showToast(msg: e.message.toString());
       log(e.message.toString());
     }
+  }
+
+  Future addUserDetails() async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser.uid)
+        .set({
+      'name': currentUser.displayName,
+      'email': currentUser.email,
+      'phone': currentUser.phoneNumber,
+      'photo': currentUser.photoURL,
+      'uid': currentUser.uid,
+    });
   }
 }
