@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:reviewtherapist/app/utils/samble_strings.dart';
 import 'package:reviewtherapist/app/view/home/widget/alldaillies_widget.dart';
 import 'package:reviewtherapist/app/view/home/widget/allpost_widget.dart';
+import 'package:reviewtherapist/app/view/home/widget/custom_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(),
+      drawer: const CustomDrawer(),
       appBar: AppBar(
           backgroundColor: Colors.black45,
           title: const Text('Review Therapist'),
