@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     var isLogin = prefs.getString('email');
     var isPhone = prefs.getString('phone');
 
-    if (isLogin != null && isPhone != null) {
+    if (isLogin != null || isPhone != null) {
       Timer(const Duration(seconds: 3), () {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => const NavbarScreen()));

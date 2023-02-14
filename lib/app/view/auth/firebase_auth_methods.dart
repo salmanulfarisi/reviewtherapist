@@ -11,6 +11,7 @@ import 'package:reviewtherapist/app/utils/navigate_funtions.dart';
 import 'package:reviewtherapist/app/view/auth/otp_dialogue.dart';
 import 'package:reviewtherapist/app/view/navbar_screen.dart';
 import 'package:reviewtherapist/app/view/widget/dialogebox.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth;
@@ -179,6 +180,9 @@ class FirebaseAuthMethods {
               await _auth.signInWithCredential(credential);
               Navigator.of(context).pop(); // Remove the dialog box
               if (currentUser.phoneNumber != null) {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.setString('phone', currentUser.phoneNumber!);
+
                 Fluttertoast.showToast(msg: 'Login Successful');
                 NavigateFunctions.pushReplacePage(
                     context, const NavbarScreen());

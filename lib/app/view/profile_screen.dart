@@ -31,6 +31,7 @@ class ProfileScreen extends StatelessWidget {
                 storage.erase();
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('email');
+                prefs.remove('phone');
                 showDialog(
                   context: context,
                   builder: (context) => dialogeBox(

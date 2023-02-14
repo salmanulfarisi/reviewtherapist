@@ -7,7 +7,7 @@ import 'package:reviewtherapist/app/utils/navigate_funtions.dart';
 import 'package:reviewtherapist/app/utils/samble_strings.dart';
 import 'package:reviewtherapist/app/utils/size.dart';
 import 'package:reviewtherapist/app/view/auth/login_page.dart';
-import 'package:reviewtherapist/app/view/auth/phone_auth.dart';
+import 'package:reviewtherapist/app/view/auth/phone/phone_auth.dart';
 import 'package:reviewtherapist/app/view/widget/dot_indicator.dart';
 import 'package:reviewtherapist/app/view/widget/get_started.dart';
 
