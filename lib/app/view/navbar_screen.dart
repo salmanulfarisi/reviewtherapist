@@ -5,7 +5,7 @@ import 'package:reviewtherapist/app/utils/constants.dart';
 import 'package:reviewtherapist/app/utils/rive_utils.dart';
 import 'package:reviewtherapist/app/view/home/home_screen.dart';
 import 'package:reviewtherapist/app/view/notification_screen.dart';
-import 'package:reviewtherapist/app/view/profile_screen.dart';
+import 'package:reviewtherapist/app/view/profile/profile_screen.dart';
 import 'package:reviewtherapist/app/view/search/search_screen.dart';
 import 'package:reviewtherapist/app/view/timer_screen.dart';
 import 'package:rive/rive.dart';
