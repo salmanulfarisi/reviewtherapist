@@ -3,9 +3,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:reviewtherapist/app/utils/navigate_funtions.dart';
 import 'package:reviewtherapist/app/utils/samble_strings.dart';
 import 'package:reviewtherapist/app/utils/size.dart';
+import 'package:reviewtherapist/app/view/auth/firebase_auth_methods.dart';
 import 'package:reviewtherapist/app/view/auth/login_page.dart';
 import 'package:reviewtherapist/app/view/auth/phone/phone_auth.dart';
 import 'package:reviewtherapist/app/view/widget/dot_indicator.dart';
@@ -217,6 +219,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               icon: LineIcons.googleLogo,
               onTap: () {
                 log('Google');
+                context.read<FirebaseAuthMethods>().signInWithGoogle(context);
               },
             ),
             AppSize.sizeH20,
@@ -224,7 +227,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               text: "Get started with Email",
               icon: Icons.mail_outline_rounded,
               onTap: () {
-                NavigateFunctions.pushReplacePage(context, const LoginPage());
+                NavigateFunctions.pushPage(context, const LoginPage());
               },
             ),
             AppSize.sizeH20,

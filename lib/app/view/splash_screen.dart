@@ -24,8 +24,9 @@ class _SplashScreenState extends State<SplashScreen> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var isLogin = prefs.getString('email');
     var isPhone = prefs.getString('phone');
+    var isGoogle = prefs.getString('google');
 
-    if (isLogin != null || isPhone != null) {
+    if (isLogin != null || isPhone != null || isGoogle != null) {
       Timer(const Duration(seconds: 3), () {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => const NavbarScreen()));
